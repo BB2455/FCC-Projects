@@ -1,42 +1,48 @@
 import React from "react";
 import { Link } from "gatsby";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Form from "react-bootstrap/Form";
+import { useThemeUpdate, useTheme } from "./ThemeContext";
 
-const darkMode = false;
 const projects = [
   {
     title: "Resonsive Web Design",
     projects: [
-      { title: "Tribute Page", url: "/" },
-      { title: "Survey Form", url: "/" },
-      { title: "Product Landing Page", url: "/" },
-      { title: "Technical Documentation Page", url: "/" },
-      { title: "Personal Portfolio Webpage", url: "/" },
+      { title: "Tribute Page", slug: "/" },
+      { title: "Survey Form", slug: "/" },
+      { title: "Product Landing Page", slug: "/" },
+      { title: "Technical Documentation Page", slug: "/" },
+      { title: "Personal Portfolio Webpage", slug: "/" },
     ],
   },
   {
     title: "JavaScript Algorithms and Data Structures",
     projects: [
-      { title: "Palindrome Checker", url: "/" },
-      { title: "Roman Numeral Converter", url: "/" },
-      { title: "Caesars Cipher", url: "/" },
-      { title: "Telephone Number Validator", url: "/" },
-      { title: "Cash Register", url: "/" },
+      { title: "Palindrome Checker", slug: "/" },
+      { title: "Roman Numeral Converter", slug: "/" },
+      { title: "Caesars Cipher", slug: "/" },
+      { title: "Telephone Number Validator", slug: "/" },
+      { title: "Cash Register", slug: "/" },
     ],
   },
   {
     title: "Front End Development Libraries",
     projects: [
-      { title: "Random Quote Machine", url: "/" },
-      { title: "Markdown Previewer", url: "/" },
-      { title: "Drum Machine", url: "/" },
-      { title: "JavaScript Calculator", url: "/" },
-      { title: "25 + 5 Clock", url: "/" },
+      { title: "Random Quote Machine", slug: "/" },
+      { title: "Markdown Previewer", slug: "/" },
+      { title: "Drum Machine", slug: "/" },
+      { title: "JavaScript Calculator", slug: "/" },
+      { title: "25 + 5 Clock", slug: "/" },
     ],
   },
 ];
 
 const NavBar = () => {
+  const darkMode = useTheme();
+  const toggleTheme = useThemeUpdate();
   return (
     <Navbar
       bg={darkMode ? "dark" : "light"}
@@ -74,7 +80,11 @@ const NavBar = () => {
                   >
                     {course.projects.map((project) => {
                       return (
-                        <Link to={project.url} className="dropdown-item">
+                        <Link
+                          key={project.title}
+                          to={project.slug}
+                          className="dropdown-item"
+                        >
                           {project.title}
                         </Link>
                       );
@@ -83,6 +93,17 @@ const NavBar = () => {
                 );
               })}
             </NavDropdown>
+            <Form variant="dark">
+              <Form.Check
+                defaultChecked={darkMode}
+                type="switch"
+                id="custom-switch"
+                className="my-2 ms-2"
+                label="Dark Mode"
+                onClick={toggleTheme}
+                style={darkMode ? { color: "#fff" } : { color: "#212529" }}
+              />
+            </Form>
           </Nav>
         </Navbar.Collapse>
       </Container>
