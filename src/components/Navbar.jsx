@@ -44,11 +44,7 @@ const NavBar = () => {
   const darkMode = useTheme();
   const toggleTheme = useThemeUpdate();
   return (
-    <Navbar
-      bg={darkMode ? "dark" : "light"}
-      expand="md"
-      variant={darkMode ? "dark" : "light"}
-    >
+    <Navbar expand="md" variant={darkMode ? "dark" : "light"}>
       <Container>
         <Link className="navbar-brand" to="/">
           Blair's freeCodeCamp Projects
@@ -93,17 +89,15 @@ const NavBar = () => {
                 );
               })}
             </NavDropdown>
-            <Form variant="dark">
-              <Form.Check
-                defaultChecked={darkMode}
-                type="switch"
-                id="custom-switch"
-                className="my-2 ms-2"
-                label="Dark Mode"
-                onClick={toggleTheme}
-                style={darkMode ? { color: "#fff" } : { color: "#212529" }}
-              />
-            </Form>
+            <Form.Check
+              defaultChecked={darkMode}
+              type="switch"
+              id="custom-switch"
+              className="my-2 ms-2"
+              label="Dark Mode"
+              onClick={toggleTheme}
+              style={darkMode ? { color: "#fff" } : { color: "#212529" }}
+            />
           </Nav>
         </Navbar.Collapse>
       </Container>

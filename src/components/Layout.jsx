@@ -1,15 +1,15 @@
 import React from "react";
 import NavBar from "./Navbar";
 import Footer from "./Footer";
-import { ThemeProvider } from "./ThemeContext";
+import { MainThemeProvider } from "./ThemeContext";
 
 const Layout = ({ children }) => {
   return (
-    <ThemeProvider>
+    <MainThemeProvider>
       <NavBar />
       {children}
       <Footer />
-    </ThemeProvider>
+    </MainThemeProvider>
   );
 };
 

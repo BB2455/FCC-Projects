@@ -1,5 +1,8 @@
 import React from "react";
+import GlobalStyle from "../global.styled";
+import { ThemeProvider } from "styled-components";
 import { getStorage, setStorage, isStorage } from "../utils/localStorage";
+import { lightTheme, darkTheme } from "../themes";
 
 const themeContext = React.createContext();
 const themeUpdateContext = React.createContext();
@@ -14,7 +17,7 @@ export const useThemeUpdate = () => {
 
 const STORAGENAME = "darkMode";
 
-export const ThemeProvider = ({ children }) => {
+export const MainThemeProvider = ({ children }) => {
   let storageValue = false;
   const storage = isStorage(STORAGENAME);
   if (!storage) {
@@ -33,7 +36,10 @@ export const ThemeProvider = ({ children }) => {
   return (
     <themeContext.Provider value={darkMode}>
       <themeUpdateContext.Provider value={toggleDarkMode}>
-        {children}
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+          <GlobalStyle />
+          {children}
+        </ThemeProvider>
       </themeUpdateContext.Provider>
     </themeContext.Provider>
   );
